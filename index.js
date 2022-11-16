@@ -20,8 +20,8 @@ exports.handler = function handler(event, context, callback) {
     region: "us-east-1",
   });
   AWS.config.update({
-    secretaccesskey: process.env.AWS_SECRET_ACCESS_KEY,
-    accesskey: process.env.AWS_ACCESS_KEY_ID,
+    // secretaccesskey: process.env.AWS_SECRET_ACCESS_KEY,
+    // accesskey: process.env.AWS_ACCESS_KEY_ID,
     region: "us-east-1",
   });
 
