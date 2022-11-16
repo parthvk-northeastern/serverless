@@ -38,4 +38,4 @@ jobs:
            aws s3 cp ./index.zip s3://myawsbucketparth-1/
       - name: Lambda Update
         run: |
-          aws lambda update-function-code --function-name MailingServiceFunction --s3-bucket myawsbucketparth-1 --s3-key index.zip
+          aws lambda update-function-code --function-name emailVerify --s3-bucket myawsbucketparth-1 --s3-key index.zip
