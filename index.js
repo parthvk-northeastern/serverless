@@ -49,7 +49,7 @@ exports.handler = function handler(event, context, callback) {
           Charset: "UTF-8",
           Data:
             "Hello! Click on this link to verify " +
-            "http://dev.parthk117.me/v1/verifyEmail?email=" +
+            "http://parthk117.me/v1/verifyEmail?email=" +
             msg +
             "&token=" +
             token,
