@@ -30,12 +30,12 @@ jobs:
       - name: Configuring AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_R }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY_R }}
           aws-region: us-east-1
       - name: Copying artifact to S3
         run: |
-           aws s3 cp ./index.zip s3://myawsbucketparth-1/
+           aws s3 cp ./index.zip s3://parth-csye6225-neu.dev.parth.me/
       - name: Lambda Update
         run: |
-          aws lambda update-function-code --function-name emailVerify --s3-bucket myawsbucketparth-1 --s3-key index.zip
+          aws lambda update-function-code --function-name emailVerify --s3-bucket parth-csye6225-neu.dev.parth.me --s3-key index.zip

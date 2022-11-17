@@ -92,7 +92,7 @@ exports.handler = function handler(event, context, callback) {
                   console.log("Email sent");
                 })
                 .catch(function (error) {
-                  console("Error ocurred!!");
+                  console.log("Error ocurred!!");
                 });
             } else {
               console.log("testing here, error error!!");
