@@ -22,11 +22,7 @@ jobs:
 
       - name: Creating a zip file for lambda
         run: |
-             pwd
-             ls -al
              zip -r index.zip ./
-             echo "after zipping index folder"
-             ls -al
       - name: Configuring AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:

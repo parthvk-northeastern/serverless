@@ -2,10 +2,10 @@ const AWS = require("aws-sdk");
 
 const region = "us-east-1";
 
-console.log("Inside Lambda function");
+console.log("Lambda function starts");
 
 exports.handler = function handler(event, context, callback) {
-  console.log("Message from SNS....");
+  console.log("sns triggered the function");
 
   var msg = event.Records[0].Sns.Message;
 
@@ -20,8 +20,6 @@ exports.handler = function handler(event, context, callback) {
     region: "us-east-1",
   });
   AWS.config.update({
-    // secretaccesskey: process.env.AWS_SECRET_ACCESS_KEY,
-    // accesskey: process.env.AWS_ACCESS_KEY_ID,
     region: "us-east-1",
   });
 
@@ -35,9 +33,9 @@ exports.handler = function handler(event, context, callback) {
     ProjectionExpression: "EmailID",
   };
 
-  console.log("checking from username dynamo DB table", tokenparams);
+  console.log("checking inside username dynamo DB table", tokenparams);
 
-  // declaring the email parameters
+  // defining the email parameters
 
   var emailParams = {
     Destination: {
@@ -48,7 +46,7 @@ exports.handler = function handler(event, context, callback) {
         Html: {
           Charset: "UTF-8",
           Data:
-            "Hello! Click on this link to verify " +
+            "Hey! Please click on this link to verify your email address. Link valid for 5 minutes " +
             "http://parthk117.me/v1/verifyEmail?email=" +
             msg +
             "&token=" +
@@ -57,13 +55,11 @@ exports.handler = function handler(event, context, callback) {
       },
       Subject: {
         Charset: "UTF-8",
-        Data: "Link to verify email address",
+        Data: "Email Address verification for webapp",
       },
     },
     Source: "csye6225parth@parthk117.me",
   };
-
-  //Adding to UsernameDynamoDB
 
   var paramsDB = {
     Item: {
@@ -73,12 +69,9 @@ exports.handler = function handler(event, context, callback) {
   };
 
   dynamodb.getItem(tokenparams, (error, data) => {
-    console.log("Test here!!");
     if (error) {
-      console.log("Right heree!!!1");
       console.log(error);
     } else {
-      console.log("Correct!!");
       console.log(data);
       if (data.Item == undefined) {
         dynamodb.putItem(
@@ -93,9 +86,11 @@ exports.handler = function handler(event, context, callback) {
                 })
                 .catch(function (error) {
                   console.log("Error ocurred!!");
+                  console.log(error);
                 });
             } else {
-              console.log("testing here, error error!!");
+              console.log("error error!!");
+              console.log(error);
             }
           })
         );
